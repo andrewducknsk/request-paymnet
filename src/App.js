@@ -3,6 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  // window.navigator.vibrate(
+    console.log(window.navigator.vibrate(200))
+
   return (
     <div className="App">
       <header className="App-header">
