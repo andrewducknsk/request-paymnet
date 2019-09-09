@@ -1,0 +1,33 @@
+.count-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 25px;
+  
+  &_decrease,
+  &_increase {
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    background: lightgreen;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    transition: 0.15s ease-in-out;
+
+    &:hover {
+      background: greenyellow;
+    }
+
+    &:active {
+      background: green;
+    }
+  }
+
+  &_value {
+    margin: 15px 50px;
+    font-weight: bold;
+  }
+}
