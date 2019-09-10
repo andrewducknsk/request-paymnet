@@ -21,18 +21,21 @@ export default memo(function App() {
         description="It is a pineapple 🍍"
         img={pizza}
         alt="Hawaiian Pizza"
+        paymentOptions={{ email: true }}
         />
       <Card 
         title="Taco by 'Danny' Trejo"
         description="Each member who has risen in my institution makes a profit. No freebies, such rules."
         img={taco}
         alt="Taco by 'Danny' Trejo"
+        paymentOptions={{ email: true, phone: true }}
         />
       <Card 
         title="Corn Dog"
         description="Gav-gav-gav. Help me, please..."
         img={corn}
         alt="Corn Dog"
+        paymentOptions={{ email: true, phone: true, name: true }}
         />
     </div>
   );
