@@ -1,8 +1,13 @@
 import React, { memo, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import locale from '../../locale';
 import './count-buttons.scss';
 
-export default memo(function CountButtons({onChange}) {
+const propTypes = {
+  onChange: PropTypes.func.isRequired 
+};
+
+function CountButtons({onChange}) {
   const [count, setCount] = useState(0);
   
   useEffect(() => {
@@ -36,4 +41,8 @@ export default memo(function CountButtons({onChange}) {
       </button>
     </div>
   )
-})
+}
+
+CountButtons.propTypes = propTypes;
+
+export default memo(CountButtons);

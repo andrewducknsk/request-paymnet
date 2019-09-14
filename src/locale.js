@@ -1,7 +1,8 @@
 export default {
+    header: 'Food Store from Memes',
     countButtons: {
-        decreaseBtn: "-",
-        increaseBtn: "+"
+        decreaseBtn: '-',
+        increaseBtn: '+'
     },
     card: {
         buyBtn: 'Buy'
