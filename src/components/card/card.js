@@ -1,8 +1,8 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import locale from '../../locale';
 import CountButtons from '../count-buttons/count-buttons';
 import { paymentMethods, paymentDetails, options } from '../../utils/payment-request/payment-request';
+import { MyContext } from '../../context';
 import './card.scss';
 
 const propTypes = {
@@ -16,6 +16,7 @@ const propTypes = {
 function Card({title, description, img, alt, paymentOptions = {}}) {
   const [counter, setCounter] = useState(0);
   // const [shippingPrice, setShippingPrice] = useState('0');
+  const { card: { buyBtn }} = useContext(MyContext);
   
   const payment = new PaymentRequest(
     paymentMethods, 
@@ -97,7 +98,7 @@ function Card({title, description, img, alt, paymentOptions = {}}) {
         className="card_buy-btn"
         onClick={onPayment}
       >
-        {locale.card.buyBtn}
+        {buyBtn}
       </button>
     </div>
   )

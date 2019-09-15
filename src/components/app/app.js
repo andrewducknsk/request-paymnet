@@ -1,14 +1,15 @@
 import React, { memo } from 'react';
 import Header from '../header/header';
 import Cards from '../cards/cards';
-import './app.scss';
+import { MyContext } from '../../context';
+import locale from '../../locale';
 
 function App() {
   return (
-    <div className="app">
+    <MyContext.Provider value={locale}>
       <Header />
       <Cards />
-    </div>
+    </MyContext.Provider>
   );
 }
 

@@ -1,6 +1,6 @@
-import React, { memo, useState, useEffect } from 'react';
+import React, { memo, useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import locale from '../../locale';
+import { MyContext } from '../../context';
 import './count-buttons.scss';
 
 const propTypes = {
@@ -9,7 +9,8 @@ const propTypes = {
 
 function CountButtons({onChange}) {
   const [count, setCount] = useState(0);
-  
+  const { countButtons: { decreaseBtn, increaseBtn } } = useContext(MyContext); 
+
   useEffect(() => {
     onChange(count);
   })
@@ -30,14 +31,14 @@ function CountButtons({onChange}) {
         className="count-buttons_decrease"
         onClick={onClickDecrease}
       >
-        {locale.countButtons.decreaseBtn}
+        {decreaseBtn}
       </button>
       <p className="count-buttons_value">{count}</p>
       <button 
         className="count-buttons_increase"
         onClick={onClickIncrease}
       >
-        {locale.countButtons.increaseBtn}
+        {increaseBtn}
       </button>
     </div>
   )
