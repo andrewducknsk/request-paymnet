@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "static/css/main.e19ba857.chunk.css",
-    "main.js": "static/js/main.44e2ef50.chunk.js",
-    "main.js.map": "static/js/main.44e2ef50.chunk.js.map",
-    "runtime~main.js": "static/js/runtime~main.d586b8af.js",
-    "runtime~main.js.map": "static/js/runtime~main.d586b8af.js.map",
-    "static/js/2.c695082c.chunk.js": "static/js/2.c695082c.chunk.js",
-    "static/js/2.c695082c.chunk.js.map": "static/js/2.c695082c.chunk.js.map",
+    "main.css": "static/css/main.db2596ad.chunk.css",
+    "main.js": "static/js/main.c58b32bf.chunk.js",
+    "main.js.map": "static/js/main.c58b32bf.chunk.js.map",
+    "runtime~main.js": "static/js/runtime~main.3df7b5de.js",
+    "runtime~main.js.map": "static/js/runtime~main.3df7b5de.js.map",
+    "static/js/2.d1b1efee.chunk.js": "static/js/2.d1b1efee.chunk.js",
+    "static/js/2.d1b1efee.chunk.js.map": "static/js/2.d1b1efee.chunk.js.map",
     "static/media/burger.jpg": "./static/media/burger.a400648c.jpg",
     "static/media/corn.jpg": "./static/media/corn.4db12efd.jpg",
     "static/media/pi.png": "./static/media/pi.408e36d6.png",
     "static/media/taco.jpg": "./static/media/taco.b0ff0ba0.jpg",
     "index.html": "index.html",
-    "precache-manifest.45525ebebee839ecfd39d51e929077f6.js": "precache-manifest.45525ebebee839ecfd39d51e929077f6.js",
+    "precache-manifest.48ceb47b21b4f000074047207462fb82.js": "precache-manifest.48ceb47b21b4f000074047207462fb82.js",
     "service-worker.js": "service-worker.js",
-    "static/css/main.e19ba857.chunk.css.map": "static/css/main.e19ba857.chunk.css.map"
+    "static/css/main.db2596ad.chunk.css.map": "static/css/main.db2596ad.chunk.css.map"
   }
 }

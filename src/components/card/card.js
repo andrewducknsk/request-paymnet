@@ -1,7 +1,7 @@
 import React, { memo, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import CountButtons from '../count-buttons/count-buttons';
-import { paymentMethods, paymentDetails, options } from '../../utils/payment-request/payment-request';
+import paymentFactory from '../../utils/payment-request';
 import { MyContext } from '../../context';
 import './card.scss';
 
@@ -10,98 +10,84 @@ const propTypes = {
   description: PropTypes.string,
   img: PropTypes.string,
   alt: PropTypes.string,
-  paymentOptions: PropTypes.object
-}
+  paymentOptions: PropTypes.object,
+};
 
-function Card({title, description, img, alt, paymentOptions = {}}) {
-  const [counter, setCounter] = useState(0);
-  // const [shippingPrice, setShippingPrice] = useState('0');
-  const { card: { buyBtn }} = useContext(MyContext);
-  
+function Card({ title, description, price, img, alt, paymentOptions = {} }) {
+  const [counter, setCounter] = useState(1);
+  const {
+    card: { buyBtn },
+  } = useContext(MyContext);
+
+  const paymentData = new paymentFactory(title, counter, price, paymentOptions);
   const payment = new PaymentRequest(
-    paymentMethods, 
-    paymentDetails(title, counter), 
-    options(paymentOptions)
+    paymentData.getPaymentMethods,
+    paymentData.getPaymentDetails,
+    paymentData.getOptions
   );
 
-  // const updateDispalyItems = () => {
-  //   const displayItems = paymentDetails.displayItems;
+  payment.addEventListener('shippingaddresschange', event => {
+    event.updateWith({
+      displayItems: paymentData.updateDispalyItems(),
+      total: {
+        label: 'Total price:',
+        amount: {
+          currency: 'RUB',
+          value: paymentData.calculationTotalPrice(),
+        },
+      },
+      shippingOptions: paymentData.getShippingOptions,
+    });
+  });
 
-  //   displayItems.push({
-  //     label: 'Shipping',
-  //     amount: { 
-  //       currency: 'RUB', 
-  //       value: shippingPrice 
-  //     }
-  //   })
+  payment.addEventListener('shippingoptionchange', event => {
+    const selectedId = event.target.shippingOption;
 
-  //   return displayItems;
-  // }
+    paymentData.shippingOptions.forEach(option => {
+      option.selected = option.id === selectedId;
+    });
 
-  // payment.addEventListener('shippingaddresschange', (event) => {
-  //   event.updateWith({
-  //     displayItems: updateDispalyItems(),
-  //     total: {
-  //       label: 'Total price:',
-  //       amount: {
-  //         currency: 'RUB',
-  //         value: shippingPrice,
-  //       },
-  //     }
-  //   });
-  //  });
+    event.updateWith({
+      displayItems: paymentData.setShippingPrice(),
+      total: {
+        label: 'Total price:',
+        amount: {
+          currency: 'RUB',
+          value: paymentData.calculationTotalPrice(),
+        },
+      },
+      shippingOptions: paymentData.getShippingOptions,
+    });
+  });
 
-  // payment.addEventListener('shippingoptionchange', (event) => {
-  //   const prInstance = event.target;
-  //   const selectedId = prInstance.shippingOption;
-    
-  //   shippingOptions.forEach((option) => {
-  //     if (option.selected) {
-  //       setShippingPrice(option.amount.value);
-  //     }
-  //     option.selected = option.id === selectedId;
-  //   });
-    
-
-  //   event.updateWith({
-  //     total: {
-  //       label: 'Total price:',
-  //       amount: {
-  //         currency: 'RUB',
-  //         value: shippingPrice,
-  //       },
-  //     },
-  //     shippingOptions,
-  //   });
-  // });
-
-
-  const getCount = (count) => {
+  const getCount = count => {
     setCounter(count);
-  }
- 
-  const onPayment = () => {
-    payment.show().then(response => {
-      console.log(response)
-      response.complete('success')
-    }).catch(error => error);
-  }
+  };
 
+  const onPayment = () => {
+    const isCounterMoreZero = counter > 0;
+
+    isCounterMoreZero &&
+      payment
+        .show()
+        .then(response => {
+          console.log(response);
+          response.complete('success');
+        })
+        .catch(error => error);
+  };
 
   return (
     <div className="card">
       <h3 className="card_title">{title}</h3>
       <img className="card_img" src={img} alt={alt} />
       <p className="card_description">{description}</p>
-      <CountButtons onChange={getCount}/>  
-      <button 
-        className="card_buy-btn"
-        onClick={onPayment}
-      >
+      <CountButtons onChange={getCount} />
+      <button className="card_buy-btn" onClick={onPayment}>
         {buyBtn}
       </button>
     </div>
-  )
+  );
 }
 
 Card.propTypes = propTypes;
